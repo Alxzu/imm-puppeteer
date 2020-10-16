@@ -1,4 +1,4 @@
-const chromium = require('chrome-aws-lambda');
+const puppeteer = require('puppeteer');
 
 const PAGE = 'https://montevideo.gub.uy/aplicacion/reserva-de-hora-para-tramites-de-contralor-y-registro-de-vehiculos';
 const TIMEOUT = 500;
@@ -6,10 +6,7 @@ const TIMEOUT = 500;
 exports.handler = async (event) => {
   console.log('.::. Hello there...');
   let execute = true;
-  // const browser = await puppeteer.launch({ headless: true });
-  const browser = await chromium.puppeteer.launch({
-    headless: true
-  });
+  const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
   await page.goto(PAGE);
   const frame = await loadFrameContent(page, browser);
